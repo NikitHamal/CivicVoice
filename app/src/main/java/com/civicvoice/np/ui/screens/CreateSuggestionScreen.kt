@@ -7,12 +7,14 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.civicvoice.np.data.Category
 import com.civicvoice.np.ui.theme.CivicVoiceTheme
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -79,8 +81,7 @@ fun CreateSuggestionScreen(
                 leadingIcon = {
                     Icon(
                         Icons.Default.Description,
-                        contentDescription = null,
-                        modifier = Modifier.align(androidx.compose.ui.Alignment.Top)
+                        contentDescription = null
                     )
                 },
                 maxLines = 10
@@ -135,7 +136,7 @@ fun CreateSuggestionScreen(
                         .padding(16.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                    Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
                             imageVector = Icons.Default.VisibilityOff,
                             contentDescription = null,
