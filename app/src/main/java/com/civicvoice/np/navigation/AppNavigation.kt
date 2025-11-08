@@ -25,6 +25,8 @@ sealed class BottomNavItem(val route: String, val icon: ImageVector, val label: 
     object Home : BottomNavItem(Screen.Home.route, Icons.Default.Home, "Home")
     object Create : BottomNavItem(Screen.Create.route, Icons.Default.Add, "Create")
     object Dashboard : BottomNavItem(Screen.Dashboard.route, Icons.Default.Dashboard, "Dashboard")
+    object Issues : BottomNavItem(Screen.Issues.route, Icons.Default.List, "Issues")
+    object Reports : BottomNavItem(Screen.Reports.route, Icons.Default.BarChart, "Reports")
     object Profile : BottomNavItem(Screen.Profile.route, Icons.Default.Person, "Profile")
 }
 
@@ -127,7 +129,7 @@ fun MainScreen(
     val isDarkMode by viewModel.isDarkMode.collectAsState()
 
     val bottomNavItems = if (currentUser?.role == UserRole.AUTHORITY) {
-        listOf(BottomNavItem.Home, BottomNavItem.Create, BottomNavItem.Dashboard, BottomNavItem.Profile)
+        listOf(BottomNavItem.Dashboard, BottomNavItem.Issues, BottomNavItem.Reports, BottomNavItem.Profile)
     } else {
         listOf(BottomNavItem.Home, BottomNavItem.Create, BottomNavItem.Profile)
     }
@@ -204,6 +206,22 @@ fun MainScreen(
                             viewModel.updateSuggestionStatus(id, status)
                         }
                     )
+                }
+
+                composable(BottomNavItem.Issues.route) {
+                    IssuesScreen(
+                        suggestions = suggestions,
+                        onSuggestionClick = { id ->
+                            navController.navigate(Screen.SuggestionDetail.createRoute(id))
+                        },
+                        onUpdateStatus = { id, status ->
+                            viewModel.updateSuggestionStatus(id, status)
+                        }
+                    )
+                }
+
+                composable(BottomNavItem.Reports.route) {
+                    ReportsScreen()
                 }
             }
 
