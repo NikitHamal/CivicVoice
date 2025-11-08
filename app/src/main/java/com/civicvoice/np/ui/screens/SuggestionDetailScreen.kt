@@ -160,6 +160,78 @@ fun SuggestionDetailScreen(
                 }
             }
 
+            // Expert Analysis Card
+            item {
+                var expertAnalysisExpanded by remember { mutableStateOf(true) }
+
+                Card(
+                    modifier = Modifier.fillMaxWidth(),
+                    colors = CardDefaults.cardColors(
+                        containerColor = MaterialTheme.colorScheme.tertiaryContainer
+                    )
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .animateContentSize()
+                            .padding(16.dp)
+                    ) {
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.School,
+                                    contentDescription = "Expert Analysis",
+                                    tint = MaterialTheme.colorScheme.onTertiaryContainer
+                                )
+                                Text(
+                                    "Expert Analysis",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    fontWeight = FontWeight.SemiBold
+                                )
+                            }
+                            IconButton(onClick = { expertAnalysisExpanded = !expertAnalysisExpanded }) {
+                                Icon(
+                                    imageVector = if (expertAnalysisExpanded) Icons.Default.ExpandLess else Icons.Default.ExpandMore,
+                                    contentDescription = if (expertAnalysisExpanded) "Collapse" else "Expand"
+                                )
+                            }
+                        }
+                        if (expertAnalysisExpanded) {
+                            Spacer(modifier = Modifier.height(12.dp))
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Text(
+                                    text = "Analysis by: Dr. Ramesh Koirala",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    fontWeight = FontWeight.Medium
+                                )
+                                Icon(
+                                    imageVector = Icons.Default.Verified,
+                                    contentDescription = "Verified Expert",
+                                    tint = MaterialTheme.colorScheme.primary,
+                                    modifier = Modifier.size(18.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.height(8.dp))
+                            Text(
+                                text = "Based on my analysis of similar infrastructure projects in the region, this suggestion shows considerable merit. The proposed improvements align with modern urban planning principles and would significantly enhance pedestrian safety. I recommend prioritizing this initiative in the next fiscal quarter, particularly given the high foot traffic in this area. Implementation should include proper lighting, clear signage, and regular maintenance protocols.",
+                                style = MaterialTheme.typography.bodyMedium,
+                                color = MaterialTheme.colorScheme.onTertiaryContainer
+                            )
+                        }
+                    }
+                }
+            }
+
             item {
                 Text(
                     text = suggestion.content,
