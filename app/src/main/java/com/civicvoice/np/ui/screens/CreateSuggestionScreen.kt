@@ -80,7 +80,7 @@ fun CreateSuggestionScreen(
                     Icon(
                         Icons.Default.Description,
                         contentDescription = null,
-                        modifier = Modifier.align(Alignment.Top)
+                        modifier = Modifier.align(androidx.compose.ui.Alignment.Top)
                     )
                 },
                 maxLines = 10
@@ -164,7 +164,7 @@ fun CreateSuggestionScreen(
 
             Button(
                 onClick = {
-                    kotlinx.coroutines.launch {
+                    scope.launch {
                         snackbarHostState.showSnackbar("AI is improving your suggestion...")
                     }
                 },
