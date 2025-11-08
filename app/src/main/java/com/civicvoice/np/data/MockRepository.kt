@@ -92,7 +92,11 @@ object MockRepository {
                 commentCount = 32,
                 aiPriority = true,
                 aiSummary = "High-impact environmental initiative with potential cost savings and public support. Feasibility assessment required for implementation timeline.",
-                location = "Kathmandu Valley"
+                location = "Kathmandu Valley",
+                expertAnalysis = ExpertAnalysis(
+                    expertName = "Dr. Ramesh Koirala",
+                    analysisText = "The proposal to install solar panels on government buildings is technically feasible and economically viable. Payback period is estimated to be 5-7 years, with significant long-term savings. Environmental benefits are substantial, reducing carbon emissions by an estimated 1,200 metric tons annually."
+                )
             ),
             Suggestion(
                 id = "2",

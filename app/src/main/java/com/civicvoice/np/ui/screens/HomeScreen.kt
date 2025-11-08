@@ -13,8 +13,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.civicvoice.np.data.Category
 import com.civicvoice.np.data.Status
-import com.civicvoice.np.data.Suggestion
-import com.civicvoice.np.data.Vote
+import com.civicvoice.np.data.*
+import com.civicvoice.np.ui.components.FilterSortModal
 import com.civicvoice.np.ui.components.SuggestionCard
 import com.civicvoice.np.ui.theme.CivicVoiceTheme
 
@@ -28,8 +28,19 @@ fun HomeScreen(
     onProfileClick: () -> Unit,
     onCreateClick: () -> Unit
 ) {
+    var showFilterModal by remember { mutableStateOf(false) }
     var selectedTab by remember { mutableStateOf(0) }
     val tabs = listOf("All", "Trending", "Nearby", "Category")
+
+    if (showFilterModal) {
+        FilterSortModal(
+            onDismiss = { showFilterModal = false },
+            onApplyFilters = { sortOption, statuses ->
+                // TODO: Apply filters
+                showFilterModal = false
+            }
+        )
+    }
 
     Scaffold(
         topBar = {
@@ -50,6 +61,9 @@ fun HomeScreen(
                     }
                 },
                 actions = {
+                    IconButton(onClick = { showFilterModal = true }) {
+                        Icon(Icons.Default.FilterList, "Filter")
+                    }
                     IconButton(onClick = onSearchClick) {
                         Icon(Icons.Default.Search, "Search")
                     }

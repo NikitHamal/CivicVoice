@@ -87,6 +87,22 @@ fun CreateSuggestionScreen(
                 maxLines = 10
             )
 
+            Text(
+                text = "Pin Location (Optional)",
+                style = MaterialTheme.typography.titleMedium,
+                fontWeight = FontWeight.SemiBold
+            )
+
+            OutlinedButton(
+                onClick = { /* TODO: Handle map selection */ },
+                modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.medium
+            ) {
+                Icon(Icons.Default.Place, contentDescription = "Pin Location")
+                Spacer(modifier = Modifier.width(8.dp))
+                Text("Select Location on Map")
+            }
+
             ExposedDropdownMenuBox(
                 expanded = showCategoryMenu,
                 onExpandedChange = { showCategoryMenu = it }

@@ -41,6 +41,7 @@ fun AppNavigation(
     val startDestination = when {
         showOnboarding -> Screen.Onboarding.route
         currentUser == null -> Screen.Login.route
+        currentUser?.role == UserRole.AUTHORITY -> Screen.AuthorityMain.route
         else -> Screen.Home.route
     }
 
@@ -73,7 +74,8 @@ fun AppNavigation(
             LoginScreen(
                 onLogin = { name, role ->
                     viewModel.login(name, role)
-                    navController.navigate(Screen.Home.route) {
+                    val destination = if (role == UserRole.AUTHORITY) Screen.AuthorityMain.route else Screen.Home.route
+                    navController.navigate(destination) {
                         popUpTo(Screen.Login.route) { inclusive = true }
                     }
                 }
@@ -85,6 +87,10 @@ fun AppNavigation(
                 navController = navController,
                 viewModel = viewModel
             )
+        }
+
+        composable(Screen.AuthorityMain.route) {
+            AuthorityMainScreen()
         }
 
         composable(

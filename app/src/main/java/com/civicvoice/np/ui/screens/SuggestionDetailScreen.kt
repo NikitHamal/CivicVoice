@@ -16,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.civicvoice.np.data.*
 import com.civicvoice.np.ui.components.CategoryChip
+import com.civicvoice.np.ui.components.ExpertAnalysisCard
 import com.civicvoice.np.ui.components.StatusChip
 import com.civicvoice.np.ui.theme.CivicVoiceTheme
 import java.text.SimpleDateFormat
@@ -157,6 +158,15 @@ fun SuggestionDetailScreen(
                             }
                         }
                     }
+                }
+            }
+
+            if (suggestion.expertAnalysis != null) {
+                item {
+                    ExpertAnalysisCard(
+                        expertName = suggestion.expertAnalysis.expertName,
+                        analysisText = suggestion.expertAnalysis.analysisText
+                    )
                 }
             }
 

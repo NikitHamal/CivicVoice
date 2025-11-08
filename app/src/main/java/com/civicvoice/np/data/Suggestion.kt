@@ -15,7 +15,14 @@ data class Suggestion(
     val aiPriority: Boolean = false,
     val aiSummary: String? = null,
     val location: String? = null,
-    val userVote: Vote = Vote.NONE
+    val userVote: Vote = Vote.NONE,
+    val expertAnalysis: ExpertAnalysis? = null
+)
+
+data class ExpertAnalysis(
+    val expertName: String,
+    val analysisText: String,
+    val timestamp: Long = System.currentTimeMillis()
 )
 
 enum class Category {
@@ -30,8 +37,10 @@ enum class Category {
 
 enum class Status {
     OPEN,
-    UNDER_REVIEW,
-    IMPLEMENTED
+    IN_REVIEW,
+    IMPLEMENTED,
+    REJECTED,
+    UNDER_REVIEW
 }
 
 enum class Vote {
