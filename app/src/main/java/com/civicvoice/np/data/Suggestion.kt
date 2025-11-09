@@ -15,7 +15,16 @@ data class Suggestion(
     val aiPriority: Boolean = false,
     val aiSummary: String? = null,
     val location: String? = null,
-    val userVote: Vote = Vote.NONE
+    val authority: String? = null,
+    val userVote: Vote = Vote.NONE,
+    val poll: Poll? = null
+)
+
+data class Poll(
+    val question: String,
+    val options: List<String>,
+    val votes: Map<String, Int> = emptyMap(),
+    val userVotedOption: String? = null
 )
 
 enum class Category {

@@ -30,7 +30,8 @@ fun SuggestionDetailScreen(
     onBackClick: () -> Unit,
     onVote: (String, Vote) -> Unit,
     onAddComment: (String) -> Unit,
-    onSuggestionClick: (String) -> Unit
+    onSuggestionClick: (String) -> Unit,
+    onPollVote: (String) -> Unit
 ) {
     var commentText by remember { mutableStateOf("") }
     var aiSummaryExpanded by remember { mutableStateOf(true) }
@@ -167,11 +168,50 @@ fun SuggestionDetailScreen(
                 }
             }
 
+            suggestion.poll?.let { poll ->
+                item {
+                    PollCard(poll = poll, onVote = onPollVote)
+                }
+            }
+
             item {
                 Text(
                     text = suggestion.content,
                     style = MaterialTheme.typography.bodyLarge
                 )
+            }
+
+            if (suggestion.location != null || suggestion.authority != null) {
+                item {
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        suggestion.location?.let {
+                            AssistChip(
+                                onClick = { /*TODO*/ },
+                                label = { Text(it) },
+                                leadingIcon = {
+                                    Icon(
+                                        Icons.Default.LocationOn,
+                                        contentDescription = "Location"
+                                    )
+                                }
+                            )
+                        }
+                        suggestion.authority?.let {
+                            AssistChip(
+                                onClick = { /*TODO*/ },
+                                label = { Text(it) },
+                                leadingIcon = {
+                                    Icon(
+                                        Icons.Default.Group,
+                                        contentDescription = "Authority"
+                                    )
+                                }
+                            )
+                        }
+                    }
+                }
             }
 
             item {
@@ -279,6 +319,51 @@ fun SuggestionDetailScreen(
                             )
                         }
                     }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun PollCard(
+    poll: Poll,
+    onVote: (String) -> Unit
+) {
+    var selectedOption by remember { mutableStateOf(poll.userVotedOption) }
+
+    Card {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp)
+        ) {
+            Text(
+                text = poll.question,
+                style = MaterialTheme.typography.titleLarge,
+                fontWeight = FontWeight.Bold
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            poll.options.forEach { option ->
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .clickable {
+                            selectedOption = option
+                            onVote(option)
+                        }
+                        .padding(vertical = 4.dp)
+                ) {
+                    RadioButton(
+                        selected = selectedOption == option,
+                        onClick = {
+                            selectedOption = option
+                            onVote(option)
+                        }
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Text(text = option)
                 }
             }
         }
