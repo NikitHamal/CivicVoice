@@ -33,6 +33,23 @@ object MockRepository {
         _suggestions.value = listOf(suggestion) + _suggestions.value
     }
 
+    fun votePoll(suggestionId: String, option: String) {
+        _suggestions.value = _suggestions.value.map { suggestion ->
+            if (suggestion.id == suggestionId && suggestion.poll != null) {
+                val newVotes = suggestion.poll.votes.toMutableMap()
+                newVotes[option] = (newVotes[option] ?: 0) + 1
+                suggestion.copy(
+                    poll = suggestion.poll.copy(
+                        votes = newVotes,
+                        userVotedOption = option
+                    )
+                )
+            } else {
+                suggestion
+            }
+        }
+    }
+
     fun voteSuggestion(suggestionId: String, vote: Vote) {
         _suggestions.value = _suggestions.value.map { suggestion ->
             if (suggestion.id == suggestionId) {
