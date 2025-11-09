@@ -199,8 +199,10 @@ fun CategoryChip(category: Category) {
 fun StatusChip(status: Status) {
     val (text, color) = when (status) {
         Status.OPEN -> "Open" to MaterialTheme.colorScheme.primary
+        Status.IN_REVIEW -> "In Review" to MaterialTheme.colorScheme.secondary
         Status.UNDER_REVIEW -> "Under Review" to MaterialTheme.colorScheme.tertiary
         Status.IMPLEMENTED -> "Implemented" to MaterialTheme.colorScheme.secondary
+        Status.REJECTED -> "Rejected" to MaterialTheme.colorScheme.error
     }
 
     Surface(

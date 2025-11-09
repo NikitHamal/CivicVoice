@@ -217,18 +217,9 @@ fun MainScreen(
                 ProfileScreen(
                     user = currentUser,
                     suggestions = suggestions,
-                    isDarkMode = isDarkMode,
-                    onToggleDarkMode = { viewModel.toggleDarkMode() },
-                    onLogout = {
-                        viewModel.logout()
-                        navController.navigate(Screen.Login.route) {
-                            popUpTo(Screen.Home.route) { inclusive = true }
-                        }
-                    },
                     onSuggestionClick = { id ->
                         navController.navigate(Screen.SuggestionDetail.createRoute(id))
-                    },
-                    onVote = { id, vote -> viewModel.voteSuggestion(id, vote) }
+                    }
                 )
             }
         }

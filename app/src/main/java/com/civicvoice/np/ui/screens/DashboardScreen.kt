@@ -276,8 +276,10 @@ fun DashboardSuggestionCard(
                                 Icon(
                                     when (status) {
                                         Status.OPEN -> Icons.Default.Inbox
+                                        Status.IN_REVIEW -> Icons.Default.RateReview
                                         Status.UNDER_REVIEW -> Icons.Default.HourglassEmpty
                                         Status.IMPLEMENTED -> Icons.Default.CheckCircle
+                                        Status.REJECTED -> Icons.Default.Cancel
                                     },
                                     contentDescription = null
                                 )

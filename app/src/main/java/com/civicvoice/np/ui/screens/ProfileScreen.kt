@@ -124,9 +124,9 @@ fun ProfileScreen(
 @Composable
 fun MySuggestionListItem(suggestion: Suggestion, onClick: () -> Unit) {
     val statusIcon = when (suggestion.status) {
-        SuggestionStatus.IN_REVIEW -> Icons.Default.Person
-        SuggestionStatus.IMPLEMENTED -> Icons.Default.CheckCircle
-        SuggestionStatus.REJECTED -> Icons.Default.Cancel
+        Status.IN_REVIEW -> Icons.Default.Person
+        Status.IMPLEMENTED -> Icons.Default.CheckCircle
+        Status.REJECTED -> Icons.Default.Cancel
         else -> Icons.Default.Lightbulb
     }
 
@@ -175,10 +175,10 @@ fun ProfileScreenPreview() {
                 role = UserRole.CITIZEN
             ),
             suggestions = listOf(
-                Suggestion(id = "1", title = "Improve pedestrian safety on Main St.", author = "Jane Doe", authorId = "1", status = SuggestionStatus.IN_REVIEW, timestamp = Date()),
-                Suggestion(id = "2", title = "Install more public recycling bins", author = "Jane Doe", authorId = "1", status = SuggestionStatus.IMPLEMENTED, timestamp = Date()),
-                Suggestion(id = "3", title = "Create a new community garden", author = "Jane Doe", authorId = "1", status = SuggestionStatus.SUBMITTED, timestamp = Date()),
-                 Suggestion(id = "4", title = "Add speed bumps to Elm Street", author = "Jane Doe", authorId = "1", status = SuggestionStatus.REJECTED, timestamp = Date())
+                Suggestion(id = "1", title = "Improve pedestrian safety on Main St.", content = "", category = Category.SAFETY, authorName = "Jane Doe", authorId = "1", status = Status.IN_REVIEW, timestamp = Date().time),
+                Suggestion(id = "2", title = "Install more public recycling bins", content = "", category = Category.ENVIRONMENT, authorName = "Jane Doe", authorId = "1", status = Status.IMPLEMENTED, timestamp = Date().time),
+                Suggestion(id = "3", title = "Create a new community garden", content = "", category = Category.ENVIRONMENT, authorName = "Jane Doe", authorId = "1", status = Status.OPEN, timestamp = Date().time),
+                 Suggestion(id = "4", title = "Add speed bumps to Elm Street", content = "", category = Category.TRANSPORTATION, authorName = "Jane Doe", authorId = "1", status = Status.REJECTED, timestamp = Date().time)
             ),
             onSuggestionClick = {}
         )

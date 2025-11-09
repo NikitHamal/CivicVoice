@@ -22,8 +22,8 @@ import com.civicvoice.np.ui.theme.CivicVoiceTheme
 fun AuthorityIssuesScreen() {
     // Mock data for preview
     val suggestions = listOf(
-        Suggestion(id = "1", title = "Improve pedestrian safety on Main St.", category = Category.SAFETY, votes = 120, status = Status.OPEN, authorId = "user1", authorName = "Jane Doe"),
-        Suggestion(id = "2", title = "Install more public recycling bins", category = Category.ENVIRONMENT, votes = 95, status = Status.IN_REVIEW, authorId = "user2", authorName = "John Smith")
+        Suggestion(id = "1", title = "Improve pedestrian safety on Main St.", content = "", category = Category.SAFETY, votes = 120, status = Status.OPEN, authorId = "user1", authorName = "Jane Doe"),
+        Suggestion(id = "2", title = "Install more public recycling bins", content = "", category = Category.ENVIRONMENT, votes = 95, status = Status.IN_REVIEW, authorId = "user2", authorName = "John Smith")
     )
 
     Scaffold(
