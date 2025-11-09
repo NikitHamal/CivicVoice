@@ -32,6 +32,7 @@ fun CreateSuggestionScreen(
     val scope = rememberCoroutineScope()
 
     Scaffold(
+        modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
         topBar = {
             TopAppBar(
                 title = { Text("Create Suggestion") },
@@ -70,22 +71,26 @@ fun CreateSuggestionScreen(
                 }
             )
 
-            OutlinedTextField(
-                value = description,
-                onValueChange = { description = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(200.dp),
-                label = { Text("Description") },
-                placeholder = { Text("Explain your suggestion in detail...") },
-                leadingIcon = {
-                    Icon(
-                        Icons.Default.Description,
-                        contentDescription = null
-                    )
-                },
-                maxLines = 10
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.Top
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Description,
+                    contentDescription = null,
+                    modifier = Modifier.padding(top = 16.dp, end = 8.dp)
+                )
+                OutlinedTextField(
+                    value = description,
+                    onValueChange = { description = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(200.dp),
+                    label = { Text("Description") },
+                    placeholder = { Text("Explain your suggestion in detail...") },
+                    maxLines = 10
+                )
+            }
 
             ExposedDropdownMenuBox(
                 expanded = showCategoryMenu,

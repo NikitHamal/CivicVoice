@@ -27,6 +27,7 @@ fun DashboardScreen(
     var selectedFilter by remember { mutableStateOf<Status?>(null) }
 
     Scaffold(
+        modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
         topBar = {
             TopAppBar(
                 title = {

@@ -36,6 +36,7 @@ fun SuggestionDetailScreen(
     var aiSummaryExpanded by remember { mutableStateOf(true) }
 
     Scaffold(
+        modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
         topBar = {
             TopAppBar(
                 title = { Text("Suggestion Details") },
@@ -176,13 +177,18 @@ fun SuggestionDetailScreen(
                         horizontalArrangement = Arrangement.SpaceEvenly,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Button(
+                        ElevatedButton(
                             onClick = { onVote(suggestion.id, Vote.UP) },
-                            colors = ButtonDefaults.buttonColors(
+                            colors = ButtonDefaults.elevatedButtonColors(
                                 containerColor = if (suggestion.userVote == Vote.UP) {
-                                    MaterialTheme.colorScheme.primary
+                                    MaterialTheme.colorScheme.primaryContainer
                                 } else {
-                                    MaterialTheme.colorScheme.surfaceVariant
+                                    MaterialTheme.colorScheme.surface
+                                },
+                                contentColor = if (suggestion.userVote == Vote.UP) {
+                                    MaterialTheme.colorScheme.onPrimaryContainer
+                                } else {
+                                    MaterialTheme.colorScheme.primary
                                 }
                             )
                         ) {
@@ -191,13 +197,18 @@ fun SuggestionDetailScreen(
                             Text(suggestion.votes.toString())
                         }
 
-                        OutlinedButton(
+                        ElevatedButton(
                             onClick = { onVote(suggestion.id, Vote.DOWN) },
-                            colors = ButtonDefaults.outlinedButtonColors(
-                                contentColor = if (suggestion.userVote == Vote.DOWN) {
-                                    MaterialTheme.colorScheme.error
+                            colors = ButtonDefaults.elevatedButtonColors(
+                                containerColor = if (suggestion.userVote == Vote.DOWN) {
+                                    MaterialTheme.colorScheme.errorContainer
                                 } else {
-                                    MaterialTheme.colorScheme.onSurface
+                                    MaterialTheme.colorScheme.surface
+                                },
+                                contentColor = if (suggestion.userVote == Vote.DOWN) {
+                                    MaterialTheme.colorScheme.onErrorContainer
+                                } else {
+                                    MaterialTheme.colorScheme.error
                                 }
                             )
                         ) {

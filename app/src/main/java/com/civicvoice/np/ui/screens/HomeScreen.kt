@@ -32,6 +32,7 @@ fun HomeScreen(
     val tabs = listOf("All", "Trending", "Nearby", "Category")
 
     Scaffold(
+        modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
         topBar = {
             TopAppBar(
                 title = {

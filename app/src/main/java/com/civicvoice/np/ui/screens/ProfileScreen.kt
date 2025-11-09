@@ -32,6 +32,7 @@ fun ProfileScreen(
     val tabs = listOf("My Suggestions", "My Comments", "Bookmarks")
 
     Scaffold(
+        modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing),
         topBar = {
             TopAppBar(
                 title = { Text("Profile") }
