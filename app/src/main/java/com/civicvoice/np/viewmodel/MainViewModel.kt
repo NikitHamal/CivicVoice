@@ -47,7 +47,10 @@ class MainViewModel : ViewModel() {
         title: String,
         content: String,
         category: Category,
-        isAnonymous: Boolean
+        isAnonymous: Boolean,
+        location: String?,
+        authority: String?,
+        poll: Poll?
     ) {
         viewModelScope.launch {
             val user = currentUser.value ?: return@launch
@@ -61,7 +64,10 @@ class MainViewModel : ViewModel() {
                 authorName = if (isAnonymous) "Anonymous" else user.name,
                 isAnonymous = isAnonymous,
                 votes = 0,
-                commentCount = 0
+                commentCount = 0,
+                location = location,
+                authority = authority,
+                poll = poll
             )
             MockRepository.addSuggestion(suggestion)
         }
@@ -69,6 +75,10 @@ class MainViewModel : ViewModel() {
 
     fun voteSuggestion(suggestionId: String, vote: Vote) {
         MockRepository.voteSuggestion(suggestionId, vote)
+    }
+
+    fun votePoll(suggestionId: String, option: String) {
+        MockRepository.votePoll(suggestionId, option)
     }
 
     fun addComment(suggestionId: String, text: String) {

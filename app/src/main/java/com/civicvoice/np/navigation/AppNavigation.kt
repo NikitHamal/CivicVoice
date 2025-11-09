@@ -109,7 +109,8 @@ fun AppNavigation(
                     onAddComment = { text -> viewModel.addComment(suggestionId, text) },
                     onSuggestionClick = { id ->
                         navController.navigate(Screen.SuggestionDetail.createRoute(id))
-                    }
+                    },
+                    onPollVote = { option -> viewModel.votePoll(suggestionId, option) }
                 )
             }
         }
@@ -182,8 +183,8 @@ fun MainScreen(
             composable(BottomNavItem.Create.route) {
                 CreateSuggestionScreen(
                     onBackClick = { mainNavController.popBackStack() },
-                    onSubmit = { title, content, category, isAnonymous ->
-                        viewModel.addSuggestion(title, content, category, isAnonymous)
+                    onSubmit = { title, content, category, isAnonymous, location, authority, poll ->
+                        viewModel.addSuggestion(title, content, category, isAnonymous, location, authority, poll)
                     },
                     onSuccess = {
                         mainNavController.navigate(BottomNavItem.Home.route) {
